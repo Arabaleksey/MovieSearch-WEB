@@ -1,0 +1,7 @@
+.scrollTop {
+  position: fixed;
+  bottom: 5%;
+  left: 96%;
+  border-radius: 100%;
+  cursor: pointer;
+}
