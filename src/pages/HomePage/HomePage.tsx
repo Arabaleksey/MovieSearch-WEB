@@ -7,14 +7,19 @@ import {
   deleteArrayMovies,
   clearHomePage,
 } from "../../store/reducers/movieSlice";
-import { addToFavourites } from "../../store/reducers/favouriteSlice";
+import {
+  addToFavourites,
+  deleteChekedMovie,
+} from "../../store/reducers/favouriteSlice";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useScrollHandler } from "../../hooks/useScrollHandler";
 import "./style.css";
 import SearchInput from "../../components/SearchInputForHomePage/SearchInputForHomePage";
 import { useHistory, useLocation } from "react-router-dom";
 import { UpButton } from "../../components/UpButton/UpButton";
-import { ThumbUpOffAlt } from "@mui/icons-material";
+import { FavoriteBorder } from "@mui/icons-material";
+import { DeleteOutline } from "@mui/icons-material";
+import { IMovie } from "../../interfaces/MovieInterfaces";
 
 const HomePage = () => {
   const router = useHistory();
@@ -22,6 +27,10 @@ const HomePage = () => {
   const { movies, isLoading, isError } = useAppSelector(
     (state) => state.movieReducer
   );
+  const { favouriteMovie } = useAppSelector(
+    (state) => state.movieFavouriteReducer
+  );
+
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [searchValue, setSearchValue] = useState<string>("");
   const [lastSearchValue, setLastSearchValue] = useState<string>("");
@@ -98,12 +107,21 @@ const HomePage = () => {
                   </p>
                   <p className="main__movie-type"> </p>
 
-                  <div
-                    className="main__saveToFavourite"
-                    onClick={() => dispatch(addToFavourites(movie))}
-                  >
-                    <ThumbUpOffAlt sx={{ fontSize: 30 }} />
-                  </div>
+                  {!favouriteMovie.find((el) => el.imdbID === movie.imdbID) ? (
+                    <div
+                      className="main__saveToFavourite"
+                      onClick={() => dispatch(addToFavourites(movie))}
+                    >
+                      <FavoriteBorder sx={{ fontSize: 30 }} />
+                    </div>
+                  ) : (
+                    <div
+                      className="main__saveToFavourite"
+                      onClick={() => dispatch(deleteChekedMovie(movie))}
+                    >
+                      <DeleteOutline />
+                    </div>
+                  )}
                 </div>
               </div>
             ))

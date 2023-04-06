@@ -5,7 +5,10 @@ import { fetchMovieById } from "../../store/reducers/actionCreator";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import "./style.css";
-import { addToFavourites } from "../../store/reducers/favouriteSlice";
+import {
+  addToFavourites,
+  deleteChekedMovie,
+} from "../../store/reducers/favouriteSlice";
 
 const MovieInfo: FC = () => {
   const params: any = useParams();
@@ -14,6 +17,10 @@ const MovieInfo: FC = () => {
   const dispatch = useAppDispatch();
   const { movie, isLoading, isError } = useAppSelector(
     (state) => state.movieInfoReducer
+  );
+
+  const { favouriteMovie } = useAppSelector(
+    (state) => state.movieFavouriteReducer
   );
 
   useEffect(() => {
@@ -54,12 +61,22 @@ const MovieInfo: FC = () => {
                 <p className="movieInfo__awards">{item.Awards}</p>
                 <p className="movieInfo__rating">{item.imdbRating}</p>
                 <p className="movieInfo__votes">{item.imdbVotes}</p>
-                <button
-                  className="movieInfo__btn"
-                  onClick={() => dispatch(addToFavourites(item))}
-                >
-                  Favourite
-                </button>
+
+                {!favouriteMovie.find((el) => el.imdbID === item.imdbID) ? (
+                  <button
+                    className="movieInfo__btn"
+                    onClick={() => dispatch(addToFavourites(item))}
+                  >
+                    Add to favorites
+                  </button>
+                ) : (
+                  <button
+                    className="movieInfo__btn"
+                    onClick={() => dispatch(deleteChekedMovie(item))}
+                  >
+                    Delete from favourites
+                  </button>
+                )}
               </div>
             </div>
           ))
