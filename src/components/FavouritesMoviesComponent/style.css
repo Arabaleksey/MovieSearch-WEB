@@ -1,0 +1,65 @@
+.favourites__movie-card {
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 8px 59px -13px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 2px 8px 59px -13px rgba(34, 60, 80, 0.2);
+  box-shadow: 2px 8px 59px -13px rgba(34, 60, 80, 0.2);
+  transition: all 0.2s ease;
+  padding: 20px 0;
+  background-color: #000000;
+  position: relative;
+}
+
+.favourites__movie-card:hover {
+  transform: scale(1.02);
+}
+
+.favourites__movie-title {
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.favourites__movie-release {
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.favourites__movie-type {
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.favourites__movie-block img {
+  height: 400px;
+  width: 85%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.favourites__searchBox {
+  width: 100%;
+  text-align: center;
+}
+
+.favourites__searchInfo {
+  margin: 0 auto;
+  color: #fff;
+}
+
+.favourites__deleteFromFavourite {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  cursor: pointer;
+}
+
+.favourites__nothing {
+}

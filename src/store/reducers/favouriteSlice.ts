@@ -23,7 +23,7 @@ export const movieFavouriteSlice = createSlice({
     },
     addToFavourites(state, action: PayloadAction<IMovie>): any {
       if (state.favouriteMovie.find((el) => el.imdbID === action.payload.imdbID)) {
-        console.log("Duplicate");
+        null;
       } else {
         state.favouriteMovie = [action.payload, ...state.favouriteMovie];
       }

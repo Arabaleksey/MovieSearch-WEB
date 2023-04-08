@@ -7,38 +7,28 @@ import {
   deleteArrayMovies,
   clearHomePage,
 } from "../../store/reducers/movieSlice";
-import {
-  addToFavourites,
-  deleteChekedMovie,
-} from "../../store/reducers/favouriteSlice";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useScrollHandler } from "../../hooks/useScrollHandler";
 import "./style.css";
 import SearchInput from "../../components/SearchInputForHomePage/SearchInputForHomePage";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { UpButton } from "../../components/UpButton/UpButton";
-import { FavoriteBorder } from "@mui/icons-material";
-import { DeleteOutline } from "@mui/icons-material";
-import { IMovie } from "../../interfaces/MovieInterfaces";
+import { clsx } from "clsx";
+import HomeMovies from "../../components/HomeMoviesComponent/HomeMoviesComponent";
 
 const HomePage = () => {
-  const router = useHistory();
   const dispatch = useAppDispatch();
   const { movies, isLoading, isError } = useAppSelector(
     (state) => state.movieReducer
   );
-  const { favouriteMovie } = useAppSelector(
-    (state) => state.movieFavouriteReducer
-  );
 
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState(0);
   const [searchValue, setSearchValue] = useState<string>("");
   const [lastSearchValue, setLastSearchValue] = useState<string>("");
   const [isFetching, setIsFetching] = useState<boolean>(true);
 
   const location = useLocation();
   useEffect(() => {
-    console.log("Location changed");
     dispatch(clearHomePage());
   }, [location]);
 
@@ -48,7 +38,7 @@ const HomePage = () => {
 
   useScrollHandler(setIsFetching);
 
-  useEffect(() => {
+  const getMovies = () => {
     if (lastSearchValue !== searchValue) {
       dispatch(deleteArrayMovies());
     }
@@ -59,9 +49,13 @@ const HomePage = () => {
       })
     );
     setLastSearchValue(searchValue);
-  }, [searchValue]);
+  };
 
   useEffect(() => {
+    getMovies();
+  }, [searchValue]);
+
+  const usePagination = () => {
     if (isFetching) {
       dispatch(
         fetchMovies({
@@ -71,6 +65,10 @@ const HomePage = () => {
       );
       setCurrentPage(currentPage + 1);
     }
+  };
+
+  useEffect(() => {
+    usePagination();
   }, [isFetching]);
 
   useEffect(() => {
@@ -80,56 +78,17 @@ const HomePage = () => {
   }, [isLoading]);
 
   return (
-    <div className={!movies.length ? "main" : "main__background"}>
+    <div className={clsx("main__background", !movies.length && "main")}>
+      {" "}
       <SearchInput debounceOnChange={debounceOnChange}></SearchInput>
       <div className="main__container">
         {isLoading && <Loader />}
         {isError && <h1>{isError}</h1>}
         <div className="main__movies">
-          {movies.length ? (
-            movies.map((movie) => (
-              <div className="main__movie-card" key={movie.imdbID}>
-                <div className="main__movie-block">
-                  <img
-                    onClick={(e) => {
-                      router.push(`/MovieInfo/${movie.imdbID}`);
-                    }}
-                    src={
-                      movie.Poster === "N/A"
-                        ? "https://cdn-icons-png.flaticon.com/512/84/84275.png"
-                        : movie.Poster
-                    }
-                    alt="Some pict"
-                  />
-                  <h3 className="main__movie-title">{movie.Title}</h3>
-                  <p className="main__movie-release">
-                    Type - {movie.Type} ({movie.Year})
-                  </p>
-                  <p className="main__movie-type"> </p>
-
-                  {!favouriteMovie.find((el) => el.imdbID === movie.imdbID) ? (
-                    <div
-                      className="main__saveToFavourite"
-                      onClick={() => dispatch(addToFavourites(movie))}
-                    >
-                      <FavoriteBorder sx={{ fontSize: 30 }} />
-                    </div>
-                  ) : (
-                    <div
-                      className="main__saveToFavourite"
-                      onClick={() => dispatch(deleteChekedMovie(movie))}
-                    >
-                      <DeleteOutline />
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))
-          ) : (
-            <></>
-          )}
+          {" "}
+          <HomeMovies></HomeMovies>
         </div>
-        <UpButton></UpButton>
+        <UpButton />
       </div>
     </div>
   );
