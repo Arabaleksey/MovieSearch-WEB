@@ -5,7 +5,7 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { Routes } from "../../constants/Routes";
 
 const Header = () => {
-  const { favouriteMovie } = useAppSelector(
+  const { favouriteMovies } = useAppSelector(
     (state) => state.movieFavouriteReducer
   );
   return (
@@ -22,7 +22,7 @@ const Header = () => {
             <li>
               <Link to={Routes.FAVOURITES}>Favourites</Link>
               <span className="header__link-county">
-                {favouriteMovie.length}
+                {favouriteMovies.length}
               </span>
             </li>
           </ul>

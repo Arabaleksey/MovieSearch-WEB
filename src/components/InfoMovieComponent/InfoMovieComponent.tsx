@@ -11,12 +11,8 @@ import ImageWithOnError from "../ImageWithOnError.tsx/ImageWithOnError";
 import ButtonForFavourites from "../ButtonsForFavourites/ButtonForFavourites";
 
 const InfoMovieComponent = () => {
-  const dispatch = useAppDispatch();
   const { movie } = useAppSelector((state) => state.movieInfoReducer);
-
-  const { favouriteMovie } = useAppSelector(
-    (state) => state.movieFavouriteReducer
-  );
+  console.log(movie);
   return (
     <>
       {movie.map((item) => (
@@ -30,7 +26,7 @@ const InfoMovieComponent = () => {
               <p className="movieInfo__released">{item.Released}</p>
               <p className="movieInfo__type">Type - ({item.Type})</p>
               <p className="movieInfo__runtime">{item.Runtime}</p>
-            </div>{" "}
+            </div>
             <p className="movieInfo__genre">{item.Genre}</p>
             <p className="movieInfo__director">{item.Director}</p>
             <p className="movieInfo__writer">{item.Writer}</p>

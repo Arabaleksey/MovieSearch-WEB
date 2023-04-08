@@ -7,35 +7,36 @@ import { Routes } from "../../constants/Routes";
 import { deleteChekedMovie } from "../../store/reducers/favouriteSlice";
 import { Close } from "@mui/icons-material";
 import ImageWithOnError from "../ImageWithOnError.tsx/ImageWithOnError";
+import { IMovie } from "../../interfaces/MovieInterfaces";
 
 const FavouritesMoviesComponent = () => {
   const router = useHistory();
   const dispatch = useAppDispatch();
-  const { favouriteMovie } = useAppSelector(
+  const { favouriteMovies } = useAppSelector(
     (state) => state.movieFavouriteReducer
   );
   return (
     <>
-      {favouriteMovie.length ? (
-        favouriteMovie.map((el: any) => (
-          <div className="favourites__movie-card" key={el.imdbID}>
+      {favouriteMovies.length ? (
+        favouriteMovies.map((favouriteMovie: IMovie) => (
+          <div className="favourites__movie-card" key={favouriteMovie.imdbID}>
             <div className="favourites__movie-block">
               <div
                 onClick={(e) => {
-                  router.push(`${Routes.MOVIE_INFO}/${el.imdbID}`);
+                  router.push(`${Routes.MOVIE_INFO}/${favouriteMovie.imdbID}`);
                 }}
               >
-                <ImageWithOnError poster={el.Poster}></ImageWithOnError>
+                <ImageWithOnError poster={favouriteMovie.Poster}></ImageWithOnError>
               </div>
 
-              <h3 className="favourites__movie-title">{el.Title}</h3>
+              <h3 className="favourites__movie-title">{favouriteMovie.Title}</h3>
               <p className="favourites__movie-release">
-                Type - {el.Type} ({el.Year})
+                Type - {favouriteMovie.Type} ({favouriteMovie.Year})
               </p>
               <p className="favourites__movie-type"> </p>
               <div
                 className="favourites__deleteFromFavourite"
-                onClick={() => dispatch(deleteChekedMovie(el))}
+                onClick={() => dispatch(deleteChekedMovie(favouriteMovie))}
               >
                 <Close
                   sx={{

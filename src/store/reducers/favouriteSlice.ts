@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IMovie } from "../../interfaces/MovieInterfaces";
 
 interface FavouriteMovieState {
-  favouriteMovie: IMovie[];
+  favouriteMovies: IMovie[];
 }
 
 const initialState: FavouriteMovieState = {
-  favouriteMovie: [],
+  favouriteMovies: [],
 };
 
 export const movieFavouriteSlice = createSlice({
@@ -14,18 +14,17 @@ export const movieFavouriteSlice = createSlice({
   initialState,
   reducers: {
     deleteAllMovies(state) {
-      state.favouriteMovie.length = 0;
+      state.favouriteMovies.length = 0;
     },
     deleteChekedMovie(state, action: PayloadAction<IMovie>) {
-      state.favouriteMovie = state.favouriteMovie.filter(
-        (el) => el.imdbID !== action.payload.imdbID
+      state.favouriteMovies = state.favouriteMovies.filter(
+        (favouriteMovie) => favouriteMovie.imdbID !== action.payload.imdbID
       );
     },
     addToFavourites(state, action: PayloadAction<IMovie>): any {
-      if (state.favouriteMovie.find((el) => el.imdbID === action.payload.imdbID)) {
-        null;
-      } else {
-        state.favouriteMovie = [action.payload, ...state.favouriteMovie];
+      if (!state.favouriteMovies.find((favouriteMovie) => favouriteMovie.imdbID === action.payload.imdbID)
+      ) {
+        state.favouriteMovies = [action.payload, ...state.favouriteMovies];
       }
     },
   },

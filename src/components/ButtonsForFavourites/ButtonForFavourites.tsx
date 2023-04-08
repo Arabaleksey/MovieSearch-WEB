@@ -9,12 +9,12 @@ import {
 
 const ButtonForFavourites = ({ movie }) => {
   const dispatch = useAppDispatch();
-  const { favouriteMovie } = useAppSelector(
+  const { favouriteMovies } = useAppSelector(
     (state) => state.movieFavouriteReducer
   );
   return (
     <>
-      {!favouriteMovie.find((el) => el.imdbID === movie.imdbID) ? (
+      {!favouriteMovies.find((favouriteMovie) => favouriteMovie.imdbID === movie.imdbID) ? (
         <div onClick={() => dispatch(addToFavourites(movie))}>
           <FavoriteBorder sx={{ fontSize: 30 }} />
         </div>

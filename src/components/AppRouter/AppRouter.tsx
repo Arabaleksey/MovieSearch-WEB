@@ -25,7 +25,9 @@ const AppRouter = () => {
       <Route path={Routes.MOVIE_INFO_ID}>
         <MovieInfo></MovieInfo>
       </Route>
-      <Redirect to={Routes.ERROR}></Redirect>
+      <Route path="*">
+        <ErrorPage></ErrorPage>
+      </Route>
     </Switch>
   );
 };

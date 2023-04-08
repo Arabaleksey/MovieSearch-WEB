@@ -79,13 +79,11 @@ const HomePage = () => {
 
   return (
     <div className={clsx("main__background", !movies.length && "main")}>
-      {" "}
       <SearchInput debounceOnChange={debounceOnChange}></SearchInput>
       <div className="main__container">
         {isLoading && <Loader />}
         {isError && <h1>{isError}</h1>}
         <div className="main__movies">
-          {" "}
           <HomeMovies></HomeMovies>
         </div>
         <UpButton />

@@ -8,14 +8,13 @@ import FavouritesMoviesComponent from "../../components/FavouritesMoviesComponen
 
 const FavouritesPage = () => {
   const dispatch = useAppDispatch();
-  const { favouriteMovie } = useAppSelector(
+  const { favouriteMovies } = useAppSelector(
     (state) => state.movieFavouriteReducer
   );
-
   return (
     <div className="favourites" style={{ paddingTop: "60px" }}>
       <div className="favourites__container">
-        {!!favouriteMovie.length && (
+        {!!favouriteMovies.length && (
           <button
             className="favourites__deleteAll"
             onClick={() => dispatch(deleteAllMovies())}

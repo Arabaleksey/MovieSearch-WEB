@@ -8,7 +8,7 @@ import "./style.css";
 import InfoMovieComponent from "../../components/InfoMovieComponent/InfoMovieComponent";
 
 const MovieInfo: FC = () => {
-  const params = useParams<any>();
+  const params = useParams<{ id: string }>();
   const movieId = params.id;
 
   const dispatch = useAppDispatch();

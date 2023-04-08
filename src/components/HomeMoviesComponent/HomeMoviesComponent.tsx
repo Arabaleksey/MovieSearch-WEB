@@ -14,11 +14,7 @@ import ButtonForFavourites from "../ButtonsForFavourites/ButtonForFavourites";
 
 const HomeMoviesComponent = () => {
   const router = useHistory();
-  const dispatch = useAppDispatch();
   const { movies } = useAppSelector((state) => state.movieReducer);
-  const { favouriteMovie } = useAppSelector(
-    (state) => state.movieFavouriteReducer
-  );
 
   return (
     <>
