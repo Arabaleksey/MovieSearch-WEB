@@ -2,9 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import { useAppSelector } from "../../hooks/useAppSelector";
+import { Routes } from "../../constants/Routes";
 
 const Header = () => {
-  const { favouriteMovie } = useAppSelector((state) => state.movieFavouriteReducer);
+  const { favouriteMovies } = useAppSelector(
+    (state) => state.movieFavouriteReducer
+  );
   return (
     <div className="header">
       <div className="header__container">
@@ -14,11 +17,13 @@ const Header = () => {
         <nav className="header__nav">
           <ul className="header__nav-links">
             <li>
-              <Link to="/home">Home</Link>
+              <Link to={Routes.HOME}>Home</Link>
             </li>
             <li>
-              <Link to="/favourites">Favourites</Link>
-              <span className="header__link-county">{favouriteMovie.length}</span>
+              <Link to={Routes.FAVOURITES}>Favourites</Link>
+              <span className="header__link-county">
+                {favouriteMovies.length}
+              </span>
             </li>
           </ul>
         </nav>

@@ -5,22 +5,15 @@ import { fetchMovieById } from "../../store/reducers/actionCreator";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import "./style.css";
-import {
-  addToFavourites,
-  deleteChekedMovie,
-} from "../../store/reducers/favouriteSlice";
+import InfoMovieComponent from "../../components/InfoMovieComponent/InfoMovieComponent";
 
 const MovieInfo: FC = () => {
-  const params: any = useParams();
+  const params = useParams<{ id: string }>();
   const movieId = params.id;
 
   const dispatch = useAppDispatch();
-  const { movie, isLoading, isError } = useAppSelector(
+  const { isLoading, isError } = useAppSelector(
     (state) => state.movieInfoReducer
-  );
-
-  const { favouriteMovie } = useAppSelector(
-    (state) => state.movieFavouriteReducer
   );
 
   useEffect(() => {
@@ -30,8 +23,6 @@ const MovieInfo: FC = () => {
       })
     );
   }, [movieId]);
-
-  console.log(movie);
   return (
     <div className="movieInfo">
       <div className="movieInfo__container">
@@ -39,47 +30,7 @@ const MovieInfo: FC = () => {
         {isLoading ? (
           <Loader></Loader>
         ) : (
-          movie.map((item) => (
-            <div className="movieInfo__wrapper" key={item.imdbID}>
-              <div className="movieInfo__col-2">
-                <img className="movieInfo__image" src={item.Poster}></img>
-              </div>
-              <div className="movieInfo__col-3">
-                <h2 className="movieInfo__title">{item.Title}</h2>
-                <div className="movieInfo__subtitleInfo">
-                  <p className="movieInfo__released">{item.Released}</p>
-                  <p className="movieInfo__type">Type - ({item.Type})</p>
-                  <p className="movieInfo__runtime">{item.Runtime}</p>
-                </div>
-                <p className="movieInfo__genre">{item.Genre}</p>
-                <p className="movieInfo__director">{item.Director}</p>
-                <p className="movieInfo__writer">{item.Writer}</p>
-                <p className="movieInfo__actors">{item.Actors}</p>
-                <p className="movieInfo__plot">{item.Plot}</p>
-                <p className="movieInfo__language">{item.Language}</p>
-                <p className="movieInfo__country">{item.Country}</p>
-                <p className="movieInfo__awards">{item.Awards}</p>
-                <p className="movieInfo__rating">{item.imdbRating}</p>
-                <p className="movieInfo__votes">{item.imdbVotes}</p>
-
-                {!favouriteMovie.find((el) => el.imdbID === item.imdbID) ? (
-                  <button
-                    className="movieInfo__btn"
-                    onClick={() => dispatch(addToFavourites(item))}
-                  >
-                    Add to favorites
-                  </button>
-                ) : (
-                  <button
-                    className="movieInfo__btn"
-                    onClick={() => dispatch(deleteChekedMovie(item))}
-                  >
-                    Delete from favourites
-                  </button>
-                )}
-              </div>
-            </div>
-          ))
+          <InfoMovieComponent></InfoMovieComponent>
         )}
       </div>
     </div>
