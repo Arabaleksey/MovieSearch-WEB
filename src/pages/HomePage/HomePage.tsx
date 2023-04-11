@@ -10,11 +10,11 @@ import {
 import { useDebounce } from "../../hooks/useDebounce";
 import { useScrollHandler } from "../../hooks/useScrollHandler";
 import "./style.css";
-import SearchInput from "../../components/SearchInputForHomePage/SearchInputForHomePage";
+import SearchInputForHomePage from "../../components/SearchInputForHomePage/SearchInputForHomePage";
 import { useLocation } from "react-router-dom";
 import { UpButton } from "../../components/UpButton/UpButton";
 import { clsx } from "clsx";
-import HomeMovies from "../../components/HomeMoviesComponent/HomeMoviesComponent";
+import HomeMovies from "../common/HomeMoviesComponent/HomeMoviesComponent";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -79,7 +79,9 @@ const HomePage = () => {
 
   return (
     <div className={clsx("main__background", !movies.length && "main")}>
-      <SearchInput debounceOnChange={debounceOnChange}></SearchInput>
+      <SearchInputForHomePage
+        debounceOnChange={debounceOnChange}
+      ></SearchInputForHomePage>
       <div className="main__container">
         {isLoading && <Loader />}
         {isError && <h1>{isError}</h1>}

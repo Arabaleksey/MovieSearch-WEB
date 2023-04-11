@@ -1,26 +1,38 @@
 import React from "react";
-
 import "./style.css";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import {
-  addToFavourites,
-  deleteChekedMovie,
-} from "../../store/reducers/favouriteSlice";
-import ImageWithOnError from "../ImageWithOnError.tsx/ImageWithOnError";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import ImageWithOnError from "../../../components/ImageWithOnError.tsx/ImageWithOnError";
 import ButtonForFavourites from "../ButtonsForFavourites/ButtonForFavourites";
 
 const InfoMovieComponent = () => {
   const { movie } = useAppSelector((state) => state.movieInfoReducer);
-  console.log(movie);
+  // const movieKeys = [
+  //   "Title",
+  //   "Released",
+  //   "Runtime",
+  //   "Genre",
+  //   "Director",
+  //   "Writer",
+  //   "Actors",
+  //   "Plot",
+  //   "Language",
+  //   "Country",
+  //   "Awards",
+  //   "Poster",
+  //   "imdbRating",
+  //   "imdbVotes",
+  //   "imdbID",
+  //   "Type",
+  // ];
+
   return (
     <>
       {movie.map((item) => (
         <div className="movieInfo__wrapper" key={item.imdbID}>
-          <div className="movieInfo__col-2">
+          <div className="movieInfo__col-1">
             <ImageWithOnError poster={item.Poster}></ImageWithOnError>
           </div>
-          <div className="movieInfo__col-3">
+          <div className="movieInfo__col-2">
             <h2 className="movieInfo__title">{item.Title}</h2>
             <div className="movieInfo__subtitleInfo">
               <p className="movieInfo__released">{item.Released}</p>

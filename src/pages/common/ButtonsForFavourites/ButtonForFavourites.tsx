@@ -1,11 +1,11 @@
 import React from "react";
-import { useAppSelector } from "../../hooks/useAppSelector";
+import { useAppSelector } from "../../../hooks/useAppSelector";
 import { DeleteOutline, FavoriteBorder } from "@mui/icons-material";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import {
   addToFavourites,
   deleteChekedMovie,
-} from "../../store/reducers/favouriteSlice";
+} from "../../../store/reducers/favouriteSlice";
 
 const ButtonForFavourites = ({ movie }) => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,9 @@ const ButtonForFavourites = ({ movie }) => {
   );
   return (
     <>
-      {!favouriteMovies.find((favouriteMovie) => favouriteMovie.imdbID === movie.imdbID) ? (
+      {!favouriteMovies.find(
+        (favouriteMovie) => favouriteMovie.imdbID === movie.imdbID
+      ) ? (
         <div onClick={() => dispatch(addToFavourites(movie))}>
           <FavoriteBorder sx={{ fontSize: 30 }} />
         </div>

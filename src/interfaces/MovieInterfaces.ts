@@ -38,3 +38,8 @@ export interface IMovieInfo {
   Website: string;
   Response: string;
 }
+
+export interface ICategories {
+  key:string;
+  name:string;
+}

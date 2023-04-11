@@ -5,7 +5,6 @@ import FavouritesPage from "../../pages/FavouritesPage/FavouritesPage";
 import MainPage from "../../pages/HomePage/HomePage";
 import MovieInfo from "../../pages/MovieInfo/MovieInfo";
 import { Routes } from "../../constants/Routes";
-import ErrorBoundary from "../ErrorrBoundary/ErrorBoundary";
 
 const AppRouter = () => {
   return (

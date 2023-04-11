@@ -1,0 +1,15 @@
+.categories div{
+    display: inline-block;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding:10px 20px;
+    margin-bottom:25px;
+    margin-right: 15px;
+    cursor: pointer;
+    border:1px solid transparent;
+    transition: 0.4s;
+}
+
+.categories div:hover{
+    border-color:silver;
+}

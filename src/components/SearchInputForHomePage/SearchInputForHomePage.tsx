@@ -5,7 +5,7 @@ interface IProps {
   debounceOnChange: any;
 }
 
-const SearchInput: React.FC<IProps> = ({ debounceOnChange }) => {
+const SearchInputForHomePage: React.FC<IProps> = ({ debounceOnChange }) => {
   return (
     <input
       className="input"
@@ -15,4 +15,4 @@ const SearchInput: React.FC<IProps> = ({ debounceOnChange }) => {
   );
 };
 
-export default SearchInput;
+export default SearchInputForHomePage;
