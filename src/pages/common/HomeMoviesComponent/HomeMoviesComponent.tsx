@@ -10,6 +10,10 @@ import ButtonForFavourites from "../ButtonsForFavourites/ButtonForFavourites";
 const HomeMoviesComponent = () => {
   const router = useHistory();
   const { movies } = useAppSelector((state) => state.movieReducer);
+  const {isActivated, isAuth } = useAppSelector(
+    (state) => state.authReducer
+  );
+
 
   return (
     <>
@@ -29,9 +33,11 @@ const HomeMoviesComponent = () => {
                 Type - {movie.Type} ({movie.Year})
               </p>
               <p className="main__movie-type"> </p>
-              <div className="main__saveToFavourite">
-                <ButtonForFavourites movie={movie}></ButtonForFavourites>
-              </div>
+              {isAuth && isActivated && (
+                <div className="main__saveToFavourite">
+                  <ButtonForFavourites movie={movie}></ButtonForFavourites>
+                </div>
+              )}
             </div>
           </div>
         ))}

@@ -15,6 +15,7 @@ const FavouritesMoviesComponent = () => {
   const { currentFavouriteMovies } = useAppSelector(
     (state) => state.movieFavouriteReducer
   );
+
   return (
     <>
       {currentFavouriteMovies.length ? (
@@ -26,9 +27,7 @@ const FavouritesMoviesComponent = () => {
                   router.push(`${Routes.MOVIE_INFO}/${favouriteMovie.imdbID}`);
                 }}
               >
-                <ImageWithOnError
-                  poster={favouriteMovie.Poster}
-                ></ImageWithOnError>
+                <ImageWithOnError poster={favouriteMovie.Poster} />
               </div>
 
               <h3 className="favourites__movie-title">

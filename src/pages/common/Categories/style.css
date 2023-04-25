@@ -1,4 +1,4 @@
-.categories div{
+.btn{
     display: inline-block;
     background-color: #f2f2f2;
     border-radius: 10px;
@@ -13,3 +13,8 @@
 .categories div:hover{
     border-color:silver;
 }
+
+.active__btns {
+    background-color: #4141e5;
+    color:#fff
+  }

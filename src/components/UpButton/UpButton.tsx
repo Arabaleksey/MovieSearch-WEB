@@ -23,7 +23,7 @@ export const UpButton = () => {
   };
 
   return (
-    <div onClick={() => scrollUp()} className="scrollTop">
+    <div onClick={scrollUp} className="scrollTop">
       {backToTop && <ArrowCircleUp sx={{ fontSize: 50, color: "black" }} />}
     </div>
   );

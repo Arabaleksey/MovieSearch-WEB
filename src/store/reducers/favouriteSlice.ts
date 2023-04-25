@@ -7,7 +7,7 @@ interface FavouriteMovieState {
 }
 
 const initialState: FavouriteMovieState = {
-  favouriteMovies: [],
+  favouriteMovies: JSON.parse(localStorage.getItem("MOVIE")) || [],
   currentFavouriteMovies: [],
 };
 
@@ -16,9 +16,11 @@ export const movieFavouriteSlice = createSlice({
   initialState,
   reducers: {
     serchMovie(state, action) {
+      const regex = new RegExp(action.payload, "gi");
       state.currentFavouriteMovies = state.favouriteMovies.filter((movie) =>
-        movie.Title.toLowerCase().includes(action.payload.toLowerCase())
+        movie.Title.match(regex)
       );
+      localStorage.setItem("MOVIE", JSON.stringify(state.favouriteMovies));
     },
     sortYearAscending(state) {
       state.currentFavouriteMovies = state.currentFavouriteMovies
@@ -46,12 +48,14 @@ export const movieFavouriteSlice = createSlice({
     deleteAllMovies(state) {
       state.favouriteMovies.length = 0;
       state.currentFavouriteMovies.length = 0;
+      localStorage.setItem("MOVIE", JSON.stringify(state.favouriteMovies));
     },
     deleteChekedMovie(state, action: PayloadAction<IMovie>) {
       state.favouriteMovies = state.favouriteMovies.filter(
         (favouriteMovie) => favouriteMovie.imdbID !== action.payload.imdbID
       );
       state.currentFavouriteMovies = state.favouriteMovies;
+      localStorage.setItem("MOVIE", JSON.stringify(state.favouriteMovies));
     },
     addToFavourites(state, action: PayloadAction<IMovie>): any {
       if (
@@ -61,6 +65,7 @@ export const movieFavouriteSlice = createSlice({
       ) {
         state.favouriteMovies = [action.payload, ...state.favouriteMovies];
         state.currentFavouriteMovies = state.favouriteMovies;
+        localStorage.setItem("MOVIE", JSON.stringify(state.favouriteMovies));
       }
     },
   },

@@ -12,6 +12,8 @@ const ButtonForFavourites = ({ movie }) => {
   const { favouriteMovies } = useAppSelector(
     (state) => state.movieFavouriteReducer
   );
+
+
   return (
     <>
       {!favouriteMovies.find(

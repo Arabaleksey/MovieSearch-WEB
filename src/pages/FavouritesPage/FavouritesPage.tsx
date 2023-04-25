@@ -15,32 +15,43 @@ import Categories from "../common/Categories/Categories";
 import { useDebounce } from "../../hooks/useDebounce";
 
 const FavouritesPage = () => {
+  const [toggleState, setToggleState] = useState<number>(null);
+
   const dispatch = useAppDispatch();
   const { favouriteMovies } = useAppSelector(
     (state) => state.movieFavouriteReducer
   );
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState("");
 
   const debounceOnChange = useDebounce((e: any) => {
     setSearch(e.target.value);
   }, 500);
+
   useEffect(() => {
     dispatch(serchMovie(search));
   }, [search]);
 
   return (
-    <div className="favourites" style={{ paddingTop: "60px" }}>
+    <div className="favourites">
       <div className="favourites__container">
         {!!favouriteMovies.length && (
           <>
-            <input onChange={debounceOnChange}></input>
-            <button onClick={() => dispatch(sortYearDescending())}>
+            <input onChange={debounceOnChange}/>
+            <button
+              className={toggleState === 1 ? "btn active__btn  " : "btn"}
+              onClick={() => (
+                dispatch(sortYearDescending()), setToggleState(1)
+              )}
+            >
               По убыванию
             </button>
-            <button onClick={() => dispatch(sortYearAscending())}>
+            <button
+              className={toggleState === 2 ? "btn active__btn " : "btn"}
+              onClick={() => (dispatch(sortYearAscending()), setToggleState(2))}
+            >
               По Возрастанию
             </button>
-            <Categories></Categories>
+            <Categories/>
             <button
               className="favourites__deleteAll"
               onClick={() => dispatch(deleteAllMovies())}
@@ -50,7 +61,7 @@ const FavouritesPage = () => {
           </>
         )}
         <div className="favourites__movies">
-          <FavouritesMoviesComponent></FavouritesMoviesComponent>
+          <FavouritesMoviesComponent />
         </div>
         <UpButton />
       </div>
