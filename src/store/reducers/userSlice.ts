@@ -82,6 +82,7 @@ export const userSlice = createSlice({
         state.id = action.payload.id;
         state.isActivated = action.payload.isActivated;
         state.isAuth = true;
+        console.log('asd')
       }
     );
     builder.addCase(checkAuth.pending, (state) => {
