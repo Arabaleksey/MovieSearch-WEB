@@ -1,24 +1,25 @@
 import React from "react";
 import "./style.css";
 import { useHistory } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { Routes } from "../../constants/Routes";
-import { deleteChekedMovie } from "../../store/reducers/favouriteSlice";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { Routes } from "../../../constants/Routes";
+import { deleteChekedMovie } from "../../../store/reducers/favouriteSlice";
 import { Close } from "@mui/icons-material";
-import ImageWithOnError from "../ImageWithOnError.tsx/ImageWithOnError";
-import { IMovie } from "../../interfaces/MovieInterfaces";
+import ImageWithOnError from "../../../components/ImageWithOnError.tsx/ImageWithOnError";
+import { IMovie } from "../../../interfaces/MovieInterfaces";
 
 const FavouritesMoviesComponent = () => {
   const router = useHistory();
   const dispatch = useAppDispatch();
-  const { favouriteMovies } = useAppSelector(
+  const { currentFavouriteMovies } = useAppSelector(
     (state) => state.movieFavouriteReducer
   );
+
   return (
     <>
-      {favouriteMovies.length ? (
-        favouriteMovies.map((favouriteMovie: IMovie) => (
+      {currentFavouriteMovies.length ? (
+        currentFavouriteMovies.map((favouriteMovie: IMovie) => (
           <div className="favourites__movie-card" key={favouriteMovie.imdbID}>
             <div className="favourites__movie-block">
               <div
@@ -26,10 +27,12 @@ const FavouritesMoviesComponent = () => {
                   router.push(`${Routes.MOVIE_INFO}/${favouriteMovie.imdbID}`);
                 }}
               >
-                <ImageWithOnError poster={favouriteMovie.Poster}></ImageWithOnError>
+                <ImageWithOnError poster={favouriteMovie.Poster} />
               </div>
 
-              <h3 className="favourites__movie-title">{favouriteMovie.Title}</h3>
+              <h3 className="favourites__movie-title">
+                {favouriteMovie.Title}
+              </h3>
               <p className="favourites__movie-release">
                 Type - {favouriteMovie.Type} ({favouriteMovie.Year})
               </p>
@@ -42,7 +45,7 @@ const FavouritesMoviesComponent = () => {
                   sx={{
                     color: "red",
                     cursor: "pointer",
-                    fontSize: 20
+                    fontSize: 20,
                   }}
                 />
               </div>

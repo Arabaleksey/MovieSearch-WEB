@@ -56,10 +56,14 @@
 
 .favourites__deleteFromFavourite {
   position: absolute;
-  top: 1px;
-  right: 1px;
+  top:3px;
+  right: 3px;
   cursor: pointer;
 }
 
 .favourites__nothing {
+  position: absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
 }

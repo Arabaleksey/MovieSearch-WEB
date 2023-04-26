@@ -6,15 +6,15 @@
   width: 100%;
 }
 
-.movieInfo__col-1 {
-  width: 40%;
+.movieInfo__col-2 {
+  width: 60%;
   height: 100%;
 }
 
-.movieInfo__col-2 {
+.movieInfo__col-1 {
   display: flex;
   justify-content: center;
-  width: 40%;
+  width: 30%;
   height: 100%;
   background-color: #fff;
 }

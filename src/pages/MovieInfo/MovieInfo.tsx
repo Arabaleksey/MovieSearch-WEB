@@ -5,7 +5,7 @@ import { fetchMovieById } from "../../store/reducers/actionCreator";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import "./style.css";
-import InfoMovieComponent from "../../components/InfoMovieComponent/InfoMovieComponent";
+import InfoMovieComponent from "../common/InfoMovieComponent/InfoMovieComponent";
 
 const MovieInfo: FC = () => {
   const params = useParams<{ id: string }>();

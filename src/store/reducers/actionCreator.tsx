@@ -1,5 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import MoviesService from "../../services/MoviesService";
+import AuthService from "../../services/AuthService";
+import { AuthResponse } from "../../interfaces/response/AuthResponse";
+import { API_URL } from "../../http/interceptors";
+import axios from "axios";
+import { LOCAL_STORAGE_KEYS } from "../../constants/LocalStorageKeys";
 
 export const fetchMovies = createAsyncThunk(
   "movie/fetchSeacrh",
@@ -29,3 +34,57 @@ export const fetchMovieById = createAsyncThunk(
     }
   }
 );
+
+export const login = createAsyncThunk(
+  "login",
+  async ({ email, password }: any, thunkAPI: any) => {
+    try {
+      const response = await AuthService.login(email, password);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, response.data.accessToken);
+      return response.data.user;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e.response?.data?.message);
+    }
+  }
+);
+
+export const registration = createAsyncThunk(
+  "registration",
+  async ({ name, surname, email, password }: any, thunkAPI: any) => {
+    try {
+      const response = await AuthService.registration(
+        name,
+        surname,
+        email,
+        password
+      );
+      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, response.data.accessToken);
+      return response.data.user;
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e.response?.data?.message);
+    }
+  }
+);
+
+export const logout = createAsyncThunk("logout", async () => {
+  try {
+    const response = await AuthService.logout();
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.MOVIES);
+    location.reload();
+  } catch (e: any) {
+    alert(e.response?.data?.message);
+  }
+});
+
+export const checkAuth = createAsyncThunk("checkAuth", async () => {
+  try {
+    const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
+      withCredentials: true,
+    });
+    localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, response.data.accessToken);
+    return response.data.user;
+  } catch (e: any) {
+    alert(e.response?.data?.message);
+  }
+});

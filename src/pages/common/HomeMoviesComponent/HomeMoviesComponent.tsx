@@ -1,20 +1,19 @@
 import React from "react";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { useAppSelector } from "../../hooks/useAppSelector";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { useAppSelector } from "../../../hooks/useAppSelector";
 import { useHistory } from "react-router-dom";
-import {
-  addToFavourites,
-  deleteChekedMovie,
-} from "../../store/reducers/favouriteSlice";
-import { DeleteOutline, FavoriteBorder } from "@mui/icons-material";
 import "./style.css";
-import { Routes } from "../../constants/Routes";
-import ImageWithOnError from "../ImageWithOnError.tsx/ImageWithOnError";
+import { Routes } from "../../../constants/Routes";
+import ImageWithOnError from "../../../components/ImageWithOnError.tsx/ImageWithOnError";
 import ButtonForFavourites from "../ButtonsForFavourites/ButtonForFavourites";
 
 const HomeMoviesComponent = () => {
   const router = useHistory();
   const { movies } = useAppSelector((state) => state.movieReducer);
+  const {isActivated, isAuth } = useAppSelector(
+    (state) => state.userReducer
+  );
+
 
   return (
     <>
@@ -34,9 +33,11 @@ const HomeMoviesComponent = () => {
                 Type - {movie.Type} ({movie.Year})
               </p>
               <p className="main__movie-type"> </p>
-              <div className="main__saveToFavourite">
-                <ButtonForFavourites movie={movie}></ButtonForFavourites>
-              </div>
+              {isAuth && isActivated && (
+                <div className="main__saveToFavourite">
+                  <ButtonForFavourites movie={movie}></ButtonForFavourites>
+                </div>
+              )}
             </div>
           </div>
         ))}
