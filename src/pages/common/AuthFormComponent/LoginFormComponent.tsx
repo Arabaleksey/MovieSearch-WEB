@@ -41,18 +41,18 @@ const LoginFormComponent = () => {
       >
         {({ errors, touched }) => (
           <Form className="signIn__form">
-            <label htmlFor="email">Email</label>
-            <Field name="email" placeholder="Email" className="signIn__input" id="email"/>
+            <label htmlFor="signIn__email">Email</label>
+            <Field name="email" placeholder="Email" className="signIn__input" id="signIn__email"/>
             {touched.email && errors.email && (
               <div className="signIn__required">{errors.email}</div>
             )}
-            <label htmlFor="password">Password</label>
+            <label htmlFor="signIn__password">Password</label>
             <Field
               name="password"
               placeholder="Password"
               className="signIn__input"
               type="password"
-              id="password"
+              id="signIn__password"
             />
             {touched.password && errors.password && (
               <div className="signIn__required">{errors.password}</div>
