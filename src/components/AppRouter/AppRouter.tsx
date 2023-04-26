@@ -7,9 +7,12 @@ import MovieInfo from "../../pages/MovieInfo/MovieInfo";
 import { Routes } from "../../constants/Routes";
 import AuthPage from "../../pages/AuthPage/AuthPage";
 import { useAppSelector } from "../../hooks/useAppSelector";
+import Loader from "../Loader/Loader";
 
 const AppRouter = () => {
-  const { isAuth, isActivated } = useAppSelector((state) => state.userReducer);
+  const { isAuth, isActivated, loading } = useAppSelector(
+    (state) => state.userReducer
+  );
   return (
     <Switch>
       <Route path={Routes.HOME}>
@@ -32,9 +35,7 @@ const AppRouter = () => {
       <Route path={Routes.AUTH}>
         <AuthPage></AuthPage>
       </Route>
-      <Route path="*">
-        <ErrorPage></ErrorPage>
-      </Route>
+      <Route path="*">{loading ? <Loader /> : <ErrorPage></ErrorPage>}</Route>
     </Switch>
   );
 };
