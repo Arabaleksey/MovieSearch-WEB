@@ -9,7 +9,7 @@ import AuthPage from "../../pages/AuthPage/AuthPage";
 import { useAppSelector } from "../../hooks/useAppSelector";
 
 const AppRouter = () => {
-  const { isAuth, isActivated } = useAppSelector((state) => state.authReducer);
+  const { isAuth, isActivated } = useAppSelector((state) => state.userReducer);
   return (
     <Switch>
       <Route path={Routes.HOME}>

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IMovie } from "../../interfaces/MovieInterfaces";
+import { LOCAL_STORAGE_KEYS } from "../../constants/LocalStorageKeys";
 
 interface FavouriteMovieState {
   favouriteMovies: IMovie[];
@@ -7,7 +8,7 @@ interface FavouriteMovieState {
 }
 
 const initialState: FavouriteMovieState = {
-  favouriteMovies: JSON.parse(localStorage.getItem("MOVIE")) || [],
+  favouriteMovies: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.MOVIES)) || [],
   currentFavouriteMovies: [],
 };
 
@@ -20,7 +21,7 @@ export const movieFavouriteSlice = createSlice({
       state.currentFavouriteMovies = state.favouriteMovies.filter((movie) =>
         movie.Title.match(regex)
       );
-      localStorage.setItem("MOVIE", JSON.stringify(state.favouriteMovies));
+      localStorage.setItem(LOCAL_STORAGE_KEYS.MOVIES, JSON.stringify(state.favouriteMovies));
     },
     sortYearAscending(state) {
       state.currentFavouriteMovies = state.currentFavouriteMovies
@@ -48,14 +49,14 @@ export const movieFavouriteSlice = createSlice({
     deleteAllMovies(state) {
       state.favouriteMovies.length = 0;
       state.currentFavouriteMovies.length = 0;
-      localStorage.setItem("MOVIE", JSON.stringify(state.favouriteMovies));
+      localStorage.setItem(LOCAL_STORAGE_KEYS.MOVIES, JSON.stringify(state.favouriteMovies));
     },
     deleteChekedMovie(state, action: PayloadAction<IMovie>) {
       state.favouriteMovies = state.favouriteMovies.filter(
         (favouriteMovie) => favouriteMovie.imdbID !== action.payload.imdbID
       );
       state.currentFavouriteMovies = state.favouriteMovies;
-      localStorage.setItem("MOVIE", JSON.stringify(state.favouriteMovies));
+      localStorage.setItem(LOCAL_STORAGE_KEYS.MOVIES, JSON.stringify(state.favouriteMovies));
     },
     addToFavourites(state, action: PayloadAction<IMovie>): any {
       if (
@@ -65,7 +66,7 @@ export const movieFavouriteSlice = createSlice({
       ) {
         state.favouriteMovies = [action.payload, ...state.favouriteMovies];
         state.currentFavouriteMovies = state.favouriteMovies;
-        localStorage.setItem("MOVIE", JSON.stringify(state.favouriteMovies));
+        localStorage.setItem(LOCAL_STORAGE_KEYS.MOVIES, JSON.stringify(state.favouriteMovies));
       }
     },
   },

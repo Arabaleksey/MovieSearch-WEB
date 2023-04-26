@@ -5,6 +5,7 @@ import "./style.css";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import LoginFormComponent from "../common/AuthFormComponent/LoginFormComponent";
 import RegistrationFormComponent from "../common/AuthFormComponent/RegistrationFormComponent";
+import { clsx } from "clsx";
 
 const AuthPage: FC = () => {
   const [toggleState, setToggleState] = useState(1);
@@ -12,7 +13,7 @@ const AuthPage: FC = () => {
   const history = useHistory();
 
   const { errorLogin, errorRegistration, isAuth } = useAppSelector(
-    (state) => state.authReducer
+    (state) => state.userReducer
   );
   if (isAuth && (!errorRegistration || !errorLogin)) {
     history.push("/home");
@@ -24,7 +25,7 @@ const AuthPage: FC = () => {
         <div className="signIn__tabs">
           <button
             className={
-              toggleState === 1 ? "signIn__tab active__tabs" : "signIn__tab"
+              clsx("signIn__tab", toggleState === 1 && "signIn__tab active__tabs")
             }
             onClick={() => {setToggleState(1)}}
           >
@@ -32,29 +33,25 @@ const AuthPage: FC = () => {
           </button>
           <button
             className={
-              toggleState === 2 ? "signIn__tab active__tabs" : "signIn__tab"
+              clsx("signIn__tab", toggleState === 2 && "signIn__tab active__tabs")
             }
             onClick={() => setToggleState(2)}
           >
-            Login
+            Sign in
           </button>
         </div>
         <div className="signIn__tabContent">
           <div
-            className={
-              toggleState === 1
-                ? "signIn__content active-content"
-                : "signIn__content"
-            }
+          className={
+            clsx("signIn__content", toggleState === 1 && "signIn__content active-content")
+          }
           >
             <RegistrationFormComponent></RegistrationFormComponent>
           </div>
           <div
-            className={
-              toggleState === 2
-                ? "signIn__content active-content"
-                : "signIn__content"
-            }
+           className={
+            clsx("signIn__content", toggleState === 2 && "signIn__content active-content")
+          }
           >
             <LoginFormComponent></LoginFormComponent>
           </div>

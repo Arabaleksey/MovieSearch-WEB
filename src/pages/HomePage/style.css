@@ -7,6 +7,8 @@
   align-items: center;
   justify-content: center;
   background-image: url("../../images/BackgroundHomePage.jpg");
+  /* background: -webkit-linear-gradient(90deg, #121212,#333333,#525252);
+  background: linear-gradient(90deg, #121212,#333333,#525252); */
   background-repeat: no-repeat;
   background-size: cover;
 }

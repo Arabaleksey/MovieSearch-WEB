@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  background-color: #121211;
+  background-color: #000000;
   display: flex;
   align-items: center;
   height: 60px;
@@ -22,10 +22,10 @@
 }
 
 .header__title {
-  color: #edf0f1;
+  color: #ffffff;
 }
 .header__title span {
-  color: #4141e5;;
+  color: #4141e5;
 }
 
 .header__nav-links {
@@ -38,13 +38,13 @@
 .header__nav-links li a {
   font-weight: 500;
   font-size: 16px;
-  color: #edf0f1;
+  color: #ffffff;
   transition: all 0.2s ease 0s;
 }
 
 .header__nav-links li a:hover {
-  color: #4141e5;;
-  opacity: 0.5;
+  color: #4141e5;
+
 }
 
 .header__nav-links li {
@@ -56,7 +56,7 @@
 .header__link-county {
   position: absolute;
   top: -8px;
-  color: #edf0f1;
+  color: #4141e5;
   width: 20px;
   height: 20px;
   text-align: center;
@@ -64,7 +64,7 @@
   font-size: 12px;
   border: none;
   border-radius: 50%;
-  background-color: #4141e5;
+  background-color: #ffffff;
 }
 
 .header__authInfo {
@@ -72,8 +72,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-left: 1px solid #edf0f1;
-  border-right: 1px solid #edf0f1;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
   margin-left: 30px;
 }
 
@@ -90,9 +90,9 @@
 }
 
 .header__authName {
-  font-weight: 500;
+  font-weight: 700;
   font-size: 12px;
-  color: #edf0f1;
+  color: #ffffff;
   transition: all 0.2s ease 0s;
   background-color: transparent;
   border: none;
@@ -102,7 +102,7 @@
 .header__signIn {
   font-weight: 500;
   font-size: 16px;
-  color: #edf0f1;
+  color: #ffffff;
   transition: all 0.2s ease 0s;
   display: flex;
   height: inherit;
@@ -120,16 +120,17 @@
   height: 30px;
   width: 30px;
   position: relative;
-  border: 1px solid #edf0f1;
+  border: 1px solid #ffffff;
   margin-right: 10px;
 }
 .header__authFirstLetter p {
-  color: #edf0f1;
+  color: #ffffff;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-weight: 600;
 }
 
 .header__dropdown {

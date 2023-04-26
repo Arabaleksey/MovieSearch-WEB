@@ -6,7 +6,7 @@ import ButtonForFavourites from "../ButtonsForFavourites/ButtonForFavourites";
 
 const InfoMovieComponent = () => {
   const { movie } = useAppSelector((state) => state.movieInfoReducer);
-  const { isActivated, isAuth } = useAppSelector((state) => state.authReducer);
+  const { isActivated, isAuth } = useAppSelector((state) => state.userReducer);
   // const movieKeys = [
   //   "Title",
   //   "Released",

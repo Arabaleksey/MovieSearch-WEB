@@ -3,6 +3,7 @@ import "./style.css";
 import { ICategories } from "../../../interfaces/MovieInterfaces";
 import { filterMovie } from "../../../store/reducers/favouriteSlice";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { clsx } from "clsx";
 
 const categories: ICategories[] = [
   { key: "all", name: "All" },
@@ -17,13 +18,13 @@ const Categories = () => {
     dispatch(filterMovie(category));
   };
 
-  const [toggleState, setToggleState] = useState<string>("");
+  const [toggleState, setToggleState] = useState("");
 
   return (
     <div className="categories">
       {categories.map((el) => (
         <div
-          className={toggleState === el.key ? "btn active__btns" : "btn"}
+        className={clsx("btn", toggleState === el.key && "btn active__btns")}
           key={el.key}
           onClick={() => (chooseCategory(el.key), setToggleState(el.key))}
         >

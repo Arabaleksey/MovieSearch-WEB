@@ -21,6 +21,7 @@ const FavouritesPage = () => {
   const { favouriteMovies } = useAppSelector(
     (state) => state.movieFavouriteReducer
   );
+  
   const [search, setSearch] = useState("");
 
   const debounceOnChange = useDebounce((e: any) => {
@@ -36,22 +37,26 @@ const FavouritesPage = () => {
       <div className="favourites__container">
         {!!favouriteMovies.length && (
           <>
-            <input onChange={debounceOnChange}/>
+            <input onChange={debounceOnChange} />
             <button
               className={toggleState === 1 ? "btn active__btn  " : "btn"}
-              onClick={() => (
-                dispatch(sortYearDescending()), setToggleState(1)
-              )}
+              onClick={() => {
+                dispatch(sortYearDescending());
+                setToggleState(1);
+              }}
             >
               По убыванию
             </button>
             <button
               className={toggleState === 2 ? "btn active__btn " : "btn"}
-              onClick={() => (dispatch(sortYearAscending()), setToggleState(2))}
+              onClick={() => {
+                dispatch(sortYearAscending());
+                setToggleState(2);
+              }}
             >
               По Возрастанию
             </button>
-            <Categories/>
+            <Categories />
             <button
               className="favourites__deleteAll"
               onClick={() => dispatch(deleteAllMovies())}

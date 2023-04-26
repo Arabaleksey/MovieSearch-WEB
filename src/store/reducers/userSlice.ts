@@ -30,7 +30,7 @@ const initialState: UserState = {
 };
 
 export const userSlice = createSlice({
-  name: "registration",
+  name: "user",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -53,7 +53,6 @@ export const userSlice = createSlice({
     builder.addCase(registration.rejected, (state, action: any) => {
       state.loading = false;
       if (action.payload) state.errorRegistration = action.payload;
-      console.log(action.payload);
     });
 
     // --------------------------------------------------------------------------------
@@ -72,7 +71,6 @@ export const userSlice = createSlice({
     builder.addCase(login.rejected, (state, action: any) => {
       state.loading = false;
       if (action.payload) state.errorLogin = action.payload;
-      console.log(action.payload);
     });
     // --------------------------------------------------------------------------------
 

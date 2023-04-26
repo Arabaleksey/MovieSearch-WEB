@@ -1,5 +1,6 @@
 import axios from "axios";
 import { AuthResponse } from "../interfaces/response/AuthResponse";
+import { LOCAL_STORAGE_KEYS } from "../constants/LocalStorageKeys";
 
 
 export const API_URL = `http://localhost:5000/api`;
@@ -10,7 +11,7 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+  config.headers.Authorization = `Bearer ${localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN)}`;
   return config;
 });
 
@@ -26,7 +27,7 @@ $api.interceptors.response.use(
         const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
           withCredentials: true,
         });
-        localStorage.setItem("accesstoken", response.data.accessToken);
+        localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, response.data.accessToken);
         return $api.request(originalRequest);
       } catch (e) {
         alert("Не авторизован");

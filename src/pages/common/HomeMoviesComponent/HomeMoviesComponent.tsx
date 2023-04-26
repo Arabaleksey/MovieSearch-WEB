@@ -11,7 +11,7 @@ const HomeMoviesComponent = () => {
   const router = useHistory();
   const { movies } = useAppSelector((state) => state.movieReducer);
   const {isActivated, isAuth } = useAppSelector(
-    (state) => state.authReducer
+    (state) => state.userReducer
   );
 
 

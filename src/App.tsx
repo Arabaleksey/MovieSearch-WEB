@@ -6,16 +6,17 @@ import AppRouter from "./components/AppRouter/AppRouter";
 import { useAppDispatch } from "./hooks/useAppDispatch";
 import { checkAuth } from "./store/reducers/actionCreator";
 import { useAppSelector } from "./hooks/useAppSelector";
+import { LOCAL_STORAGE_KEYS } from "./constants/LocalStorageKeys";
 
 
 function App() {
   const dispatch = useAppDispatch();
   const { isAuth } = useAppSelector(
-    (state) => state.authReducer
+    (state) => state.userReducer
   );
 
   const checkWebSiteOnAuth = () => {
-    if (localStorage.getItem("accesstoken")) {
+    if (localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN)) {
       dispatch(checkAuth());
     }
   };
