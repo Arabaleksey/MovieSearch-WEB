@@ -86,11 +86,11 @@ export const logout = createAsyncThunk("logout", async () => {
 export const checkAuth = createAsyncThunk("checkAuth", async () => {
   try {
     const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
-      // headers: {
-      //   Authorization: `Bearer ${localStorage.getItem(
-      //     LOCAL_STORAGE_KEYS.ACCESS_TOKEN
-      //   )}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(
+          LOCAL_STORAGE_KEYS.ACCESS_TOKEN
+        )}`,
+      },
       withCredentials: true,
     });
     localStorage.setItem(
