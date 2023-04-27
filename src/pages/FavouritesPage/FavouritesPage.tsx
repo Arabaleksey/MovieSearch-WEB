@@ -45,7 +45,7 @@ const FavouritesPage = () => {
                 setToggleState(1);
               }}
             >
-              По убыванию
+              Descending
             </button>
             <button
               className={toggleState === 2 ? "btn active__btn " : "btn"}
@@ -54,7 +54,7 @@ const FavouritesPage = () => {
                 setToggleState(2);
               }}
             >
-              По Возрастанию
+              Ascending
             </button>
             <Categories />
             <button

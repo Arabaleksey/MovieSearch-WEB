@@ -40,7 +40,10 @@ export const login = createAsyncThunk(
   async ({ email, password }: any, thunkAPI: any) => {
     try {
       const response = await AuthService.login(email, password);
-      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, response.data.accessToken);
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
+        response.data.accessToken
+      );
       return response.data.user;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e.response?.data?.message);
@@ -58,7 +61,10 @@ export const registration = createAsyncThunk(
         email,
         password
       );
-      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, response.data.accessToken);
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
+        response.data.accessToken
+      );
       return response.data.user;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e.response?.data?.message);
@@ -80,9 +86,17 @@ export const logout = createAsyncThunk("logout", async () => {
 export const checkAuth = createAsyncThunk("checkAuth", async () => {
   try {
     const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(
+          LOCAL_STORAGE_KEYS.ACCESS_TOKEN
+        )}`,
+      },
       withCredentials: true,
     });
-    localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, response.data.accessToken);
+    localStorage.setItem(
+      LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
+      response.data.accessToken
+    );
     return response.data.user;
   } catch (e: any) {
     alert(e.response?.data?.message);
