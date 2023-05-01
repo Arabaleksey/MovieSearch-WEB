@@ -2,8 +2,8 @@ import axios from "axios";
 import { AuthResponse } from "../interfaces/response/AuthResponse";
 import { LOCAL_STORAGE_KEYS } from "../constants/LocalStorageKeys";
 
-// export const API_URL = `http://localhost:5000/api`;
-export const API_URL = `https://node-movie-search-web.vercel.app/api`;
+export const API_URL = `http://localhost:5000/api`;
+// export const API_URL = `https://node-movie-search-web.vercel.app/api`;
 
 const $api = axios.create({
   withCredentials: true,
@@ -31,6 +31,11 @@ $api.interceptors.response.use(
       originalRequest._isRetry = true;
       try {
         const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              LOCAL_STORAGE_KEYS.ACCESS_TOKEN
+            )}`,
+          },
           withCredentials: true,
         });
         localStorage.setItem(
