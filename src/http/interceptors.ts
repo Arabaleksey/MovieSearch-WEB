@@ -30,7 +30,7 @@ $api.interceptors.response.use(
     ) {
       originalRequest._isRetry = true;
       try {
-        const response = await axios.post<AuthResponse>(`${API_URL}/refresh`, {
+        const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem(
               LOCAL_STORAGE_KEYS.ACCESS_TOKEN
