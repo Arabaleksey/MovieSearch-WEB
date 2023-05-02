@@ -6,9 +6,9 @@ import { LOCAL_STORAGE_KEYS } from "../constants/LocalStorageKeys";
 export const API_URL = `https://node-movie-search-web.vercel.app/api`;
 
 const $api = axios.create(<any>{
+  method:'GET',
   withCredentials: true,
   baseURL: API_URL,
-  credentials: 'include'
 });
 
 $api.interceptors.request.use((config) => {
@@ -38,7 +38,6 @@ $api.interceptors.response.use(
             )}`,
           },
           withCredentials: true,
-          credentials: 'include'
         });
         localStorage.setItem(
           LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
