@@ -6,7 +6,7 @@ import { LOCAL_STORAGE_KEYS } from "../constants/LocalStorageKeys";
 export const API_URL = `https://node-movie-search-web.vercel.app/api`;
 
 const $api = axios.create(<any>{
-  method:'GET',
+  method:'PUT',
   withCredentials: true,
   baseURL: API_URL,
 });
