@@ -44,6 +44,10 @@ export const login = createAsyncThunk(
         LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
         response.data.accessToken
       );
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.REFRESH_TOKEN,
+        response.data.refreshToken
+      );
       return response.data.user;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e.response?.data?.message);
@@ -65,6 +69,10 @@ export const registration = createAsyncThunk(
         LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
         response.data.accessToken
       );
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.REFRESH_TOKEN,
+        response.data.refreshToken
+      );
       return response.data.user;
     } catch (e: any) {
       return thunkAPI.rejectWithValue(e.response?.data?.message);
@@ -76,6 +84,7 @@ export const logout = createAsyncThunk("logout", async () => {
   try {
     const response = await AuthService.logout();
     localStorage.removeItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
     localStorage.removeItem(LOCAL_STORAGE_KEYS.MOVIES);
     location.reload();
   } catch (e: any) {
@@ -83,22 +92,53 @@ export const logout = createAsyncThunk("logout", async () => {
   }
 });
 
-export const checkAuth = createAsyncThunk("checkAuth", async () => {
-  // try {
-    const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
+export const checkAuth = createAsyncThunk(
+  "checkAuth",
+  async ({refreshToken}: any) => {
+    // try {
+      console.log(refreshToken)
+    const response = await axios.post<AuthResponse>(`${API_URL}/refresh`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem(
           LOCAL_STORAGE_KEYS.ACCESS_TOKEN
         )}`,
       },
+      refreshToken:refreshToken,
       withCredentials: true,
     });
     localStorage.setItem(
       LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
       response.data.accessToken
     );
+    localStorage.setItem(
+      LOCAL_STORAGE_KEYS.REFRESH_TOKEN,
+      response.data.refreshToken
+    );
     return response.data.user;
-  // } catch (e: any) {
-  //   alert(e.response?.data?.message);
-  // }
-});
+    // } catch (e: any) {
+    //   alert(e.response?.data?.message);
+    // }
+  }
+);
+
+
+// export const checkAuth = createAsyncThunk(
+//   "checkAuth",
+//   async ({refreshToken}: any, thunkAPI: any) => {
+//     console.log(refreshToken)
+//     try {
+//       const response = await AuthService.checkAuth(refreshToken);
+//       localStorage.setItem(
+//         LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
+//         response.data.accessToken
+//       );
+//       localStorage.setItem(
+//         LOCAL_STORAGE_KEYS.REFRESH_TOKEN,
+//         response.data.refreshToken
+//       );
+//       return response.data.user;
+//     } catch (e: any) {
+//       return thunkAPI.rejectWithValue(e.response?.data?.message);
+//     }
+//   }
+// );

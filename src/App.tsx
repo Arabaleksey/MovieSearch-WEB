@@ -8,16 +8,18 @@ import { checkAuth } from "./store/reducers/actionCreator";
 import { useAppSelector } from "./hooks/useAppSelector";
 import { LOCAL_STORAGE_KEYS } from "./constants/LocalStorageKeys";
 
-
 function App() {
-  const dispatch = useAppDispatch();
-  const { isAuth } = useAppSelector(
-    (state) => state.userReducer
+  const refreshToken: string = localStorage.getItem(
+    LOCAL_STORAGE_KEYS.REFRESH_TOKEN
   );
 
+  const dispatch = useAppDispatch();
   const checkWebSiteOnAuth = () => {
-    if (localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN)) {
-      dispatch(checkAuth());
+    if (
+      localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN) &&
+      localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN)
+    ) {
+      dispatch(checkAuth({ refreshToken }));
     }
   };
 
