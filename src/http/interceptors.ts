@@ -2,8 +2,8 @@ import axios from "axios";
 import { AuthResponse } from "../interfaces/response/AuthResponse";
 import { LOCAL_STORAGE_KEYS } from "../constants/LocalStorageKeys";
 
-export const API_URL = `http://localhost:5000/api`;
-// export const API_URL = `https://node-movie-search-web.vercel.app/api`;
+// export const API_URL = `http://localhost:5000/api`;
+export const API_URL = `https://node-movie-search-web.vercel.app/api`;
 
 
 const $api = axios.create(<any>{
