@@ -30,7 +30,7 @@ $api.interceptors.response.use(
       !error.config._isRetry
     ) {
       originalRequest._isRetry = true;
-      try {
+      // try {
         const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, <any>{
           // refreshToken: localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN),
           headers: {
@@ -49,9 +49,9 @@ $api.interceptors.response.use(
           response.data.refreshToken
         );
         return $api.request(originalRequest);
-      } catch (e) {
-        alert("Не авторизован");
-      }
+      // } catch (e) {
+      //   alert("Не авторизован");
+      // }
     }
     throw error;
   }
