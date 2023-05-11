@@ -13,7 +13,7 @@ const HomeMoviesComponent = () => {
   const {isActivated, isAuth } = useAppSelector(
     (state) => state.userReducer
   );
-
+console.log(movies)
 
   return (
     <>
