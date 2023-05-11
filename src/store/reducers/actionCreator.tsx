@@ -99,12 +99,12 @@ export const checkAuth = createAsyncThunk(
       console.log(refreshToken)
     const response = await axios.post<AuthResponse>(`${API_URL}/refresh`, {
       refreshToken,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem(
-          LOCAL_STORAGE_KEYS.ACCESS_TOKEN
-        )}`,
-      },
-      withCredentials: true,
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem(
+      //     LOCAL_STORAGE_KEYS.ACCESS_TOKEN
+      //   )}`,
+      // },
+      // withCredentials: true,
     });
     localStorage.setItem(
       LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
