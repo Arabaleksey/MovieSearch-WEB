@@ -97,13 +97,13 @@ export const checkAuth = createAsyncThunk(
   async ({ refreshToken }: any) => {
     // try {
     console.log(refreshToken);
-    const response = await axios.post<AuthResponse>(`${API_URL}/refresh`, {
+    const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
+      params:{refreshToken},
       headers: {
         Authorization: `Bearer ${localStorage.getItem(
           LOCAL_STORAGE_KEYS.ACCESS_TOKEN
         )}`,
       },
-      refreshToken,
       withCredentials: true,
     });
     localStorage.setItem(
