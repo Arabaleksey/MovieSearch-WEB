@@ -96,16 +96,16 @@ export const checkAuth = createAsyncThunk(
   "checkAuth",
   async ({refreshToken}: any) => {
     // try {
-      console.log(refreshToken)
     const response = await axios.post<AuthResponse>(`${API_URL}/refresh`, {
-      refreshToken,
-      // headers: {
-      //   Authorization: `Bearer ${localStorage.getItem(
-      //     LOCAL_STORAGE_KEYS.ACCESS_TOKEN
-      //   )}`,
-      // },
-      // withCredentials: true,
-    });
+      refreshToken},
+      {      headers: {
+        Authorization: `Bearer ${localStorage.getItem(
+          LOCAL_STORAGE_KEYS.ACCESS_TOKEN
+        )}`,
+      },
+      withCredentials: true,}
+
+    );
     localStorage.setItem(
       LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
       response.data.accessToken
@@ -121,7 +121,7 @@ export const checkAuth = createAsyncThunk(
   }
 );
 
-
+// axios.post('', {refreshToken}, {headers..., withCredentials})
 // export const checkAuth = createAsyncThunk(
 //   "checkAuth",
 //   async ({refreshToken}: any, thunkAPI: any) => {
